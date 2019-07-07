@@ -2,12 +2,14 @@ import { makeStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
 import CardHeader from '@material-ui/core/CardHeader'
 import CardMedia from '@material-ui/core/CardMedia'
-import CardContent from '@material-ui/core/CardContent'
 import Rating from './rating'
 
 const useStyles = makeStyles({
   card: {
     marginBottom: 40
+  },
+  header: {
+    paddingBottom: 5
   },
   media: {
     height: 0,
@@ -21,14 +23,13 @@ function Spot(props) {
   return (
     <Card className={classes.card} onClick={e => openMap(props.data)}>
       <CardHeader
+        className={classes.header}
         title={props.data.name}
         subheader={`${props.data.location.address1}, ${
           props.data.location.city
         }`}
       />
-      <CardContent>
-        <Rating rate={props.data.rating} />
-      </CardContent>
+      <Rating rate={props.data.rating} />
       <CardMedia
         className={classes.media}
         image={props.data.image_url}
