@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
 import CardHeader from '@material-ui/core/CardHeader'
@@ -23,7 +24,7 @@ const useStyles = makeStyles({
     paddingTop: '56.25%'
   },
   map: {
-    height: 500,
+    height: 193,
     width: '100%'
   },
   pin: {
@@ -35,23 +36,19 @@ const useStyles = makeStyles({
 })
 
 function Spot(props) {
+  const [showMap, setShowMap] = useState(false)
   const classes = useStyles()
 
-  return (
-    <Card className={classes.card}>
-      <CardHeader
-        className={classes.header}
-        title={props.data.name}
-        subheader={`${props.data.location.address1}, ${
-          props.data.location.city
-        }`}
-      />
-      <Rating rate={props.data.rating} />
-      <CardMedia
-        className={classes.media}
-        image={props.data.image_url}
-        title={props.data.name}
-      />
+  let content = (
+    <CardMedia
+      className={classes.media}
+      image={props.data.image_url}
+      title={props.data.name}
+    />
+  )
+
+  if (showMap) {
+    content = (
       <Box className={classes.map}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: 'AIzaSyAztPu0CRUV_tr_5UJUajdPUoW7WK24S0o' }}
@@ -65,11 +62,25 @@ function Spot(props) {
           }
         />
       </Box>
+    )
+  }
+
+  return (
+    <Card className={classes.card}>
+      <CardHeader
+        className={classes.header}
+        title={props.data.name}
+        subheader={`${props.data.location.address1}, ${
+          props.data.location.city
+        }`}
+      />
+      <Rating rate={props.data.rating} />
+      {content}
       <CardActions disableSpacing>
         <IconButton aria-label="Share">
           <ShareIcon />
         </IconButton>
-        <IconButton aria-label="Map">
+        <IconButton aria-label="Map" onClick={e => setShowMap(!showMap)}>
           <MapIcon />
         </IconButton>
         <IconButton
