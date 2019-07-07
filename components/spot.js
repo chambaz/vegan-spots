@@ -46,6 +46,7 @@ function Spot(props) {
       className={classes.media}
       image={props.data.image_url}
       title={props.data.name}
+      onClick={e => setShowMap(true)}
     />
   )
 
@@ -107,12 +108,10 @@ function renderMarkers(map, maps, data) {
 }
 
 function openDirections(data) {
-  window.open(`https://www.google.com/maps/dir/?api=1&destination=
-  ${data.name +
-    data.location.address1 +
-    data.location.city +
-    data.location.state +
-    data.location.zip_code}`)
+  window.location = `https://www.google.com/maps/dir/?api=1&destination=
+  ${data.name}, ${data.location.address1}, ${data.location.city}, ${
+    data.location.state
+  } ${data.location.zip_code}`
 }
 
 export default Spot
