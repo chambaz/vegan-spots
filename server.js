@@ -14,7 +14,9 @@ app.prepare().then(() => {
 
     if (pathname === '/spots') {
       fetch(
-        'https://api.yelp.com/v3/businesses/search?categories=restaurant,vegan&term=vegan&location=06516&sort_by=rating',
+        `https://api.yelp.com/v3/businesses/search?categories=restaurant,vegan&term=vegan&latitude=${
+          query.lat
+        }&longitude=${query.lng}&sort_by=rating`,
         {
           headers: {
             Authorization:

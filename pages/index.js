@@ -22,11 +22,26 @@ function Home() {
   const classes = useStyles()
 
   useEffect(() => {
-    fetch('http://localhost:3000/spots')
-      .then(res => res.json())
-      .then(json => {
-        setSpots(json.businesses)
-      })
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        fetch(
+          `http://localhost:3000/spots?lat=${position.coords.latitude}&lng=${
+            position.coords.longitude
+          }`
+        )
+          .then(res => res.json())
+          .then(json => {
+            if (json.error) {
+              console.error('Error fetching spots')
+              return
+            }
+            setSpots(json.businesses)
+          })
+      },
+      () => {
+        console.error('Geolocation error')
+      }
+    )
   }, [])
 
   const loadingMsg = !spots || !spots.length ? <p>Finding hot spots...</p> : ''
