@@ -7,7 +7,7 @@ import CardActions from '@material-ui/core/CardActions'
 import IconButton from '@material-ui/core/IconButton'
 import ShareIcon from '@material-ui/icons/Share'
 import MapIcon from '@material-ui/icons/Map'
-import LocationIcon from '@material-ui/icons/LocationOn'
+import NavigationIcon from '@material-ui/icons/Navigation'
 import GoogleMapReact from 'google-map-react'
 import Rating from './rating'
 
@@ -66,11 +66,16 @@ function Spot(props) {
         />
       </Box>
       <CardActions disableSpacing>
-        <IconButton aria-label="Add to favorites">
+        <IconButton aria-label="Share">
           <ShareIcon />
         </IconButton>
-        <IconButton aria-label="Share">
+        <IconButton aria-label="Map">
           <MapIcon />
+        </IconButton>
+        <IconButton
+          aria-label="Directions"
+          onClick={e => openDirections(props.data)}>
+          <NavigationIcon />
         </IconButton>
       </CardActions>
     </Card>
@@ -88,9 +93,8 @@ function renderMarkers(map, maps, data) {
   })
 }
 
-function openMap(data) {
-  console.log('open!')
-  window.open(`https://www.google.com/maps/search/?api=1&query=
+function openDirections(data) {
+  window.open(`https://www.google.com/maps/dir/?api=1&destination=
   ${data.name +
     data.location.address1 +
     data.location.city +
