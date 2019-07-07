@@ -2,6 +2,8 @@ import { makeStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
 import CardHeader from '@material-ui/core/CardHeader'
 import CardMedia from '@material-ui/core/CardMedia'
+import CardContent from '@material-ui/core/CardContent'
+import Rating from './rating'
 
 const useStyles = makeStyles({
   card: {
@@ -24,6 +26,9 @@ function Spot(props) {
           props.data.location.city
         }`}
       />
+      <CardContent>
+        <Rating rate={props.data.rating} />
+      </CardContent>
       <CardMedia
         className={classes.media}
         image={props.data.image_url}
