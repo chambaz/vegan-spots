@@ -1,12 +1,27 @@
+import { useEffect, useState } from 'react'
 import fetch from 'isomorphic-unfetch'
 
 function Home() {
-  fetch('http://localhost:3000/spots')
-    .then(res => res.json())
-    .then(json => {
-      console.log(json)
-    })
-  return <div>Finding hot spots...</div>
+  const [spots, setSpots] = useState([])
+
+  useEffect(() => {
+    fetch('http://localhost:3000/spots')
+      .then(res => res.json())
+      .then(json => {
+        setSpots(json.businesses)
+      })
+  })
+
+  const loadingMsg = !spots.length ? <p>Finding hot spots...</p> : ''
+
+  return (
+    <div>
+      {loadingMsg}
+      {spots.map((spot, index) => (
+        <li key={index}>{spot.name}</li>
+      ))}
+    </div>
+  )
 }
 
 export default Home
