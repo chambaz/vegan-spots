@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import fetch from 'isomorphic-unfetch'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import Container from '@material-ui/core/Container'
 
 function Home() {
   const [spots, setSpots] = useState([])
@@ -16,10 +18,13 @@ function Home() {
 
   return (
     <div>
-      {loadingMsg}
-      {spots.map((spot, index) => (
-        <li key={index}>{spot.name}</li>
-      ))}
+      <CssBaseline />
+      <Container>
+        {loadingMsg}
+        {spots.map((spot, index) => (
+          <li key={index}>{spot.name}</li>
+        ))}
+      </Container>
     </div>
   )
 }
