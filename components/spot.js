@@ -61,10 +61,7 @@ function Spot(props) {
           ]}
           defaultZoom={14}
           onGoogleApiLoaded={({ map, maps }) =>
-            renderMarkers(map, maps, {
-              lat: props.data.coordinates.latitude,
-              lng: props.data.coordinates.longitude
-            })
+            renderMarkers(map, maps, props.data)
           }
         />
       </Box>
@@ -80,11 +77,14 @@ function Spot(props) {
   )
 }
 
-function renderMarkers(map, maps, coords) {
-  let marker = new maps.Marker({
-    position: coords,
+function renderMarkers(map, maps, data) {
+  new maps.Marker({
+    position: {
+      lat: data.coordinates.latitude,
+      lng: data.coordinates.longitude
+    },
     map,
-    title: 'Hello World!'
+    title: data.name
   })
 }
 
