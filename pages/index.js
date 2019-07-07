@@ -12,7 +12,7 @@ function Home() {
       })
   })
 
-  const loadingMsg = !spots.length ? <p>Finding hot spots...</p> : ''
+  const loadingMsg = !spots || !spots.length ? <p>Finding hot spots...</p> : ''
 
   return (
     <div>
