@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Container from '@material-ui/core/Container'
 import Box from '@material-ui/core/Box'
+import CircularProgress from '@material-ui/core/CircularProgress'
 import Typography from '@material-ui/core/Typography'
 import Card from '@material-ui/core/Card'
 import CardHeader from '@material-ui/core/CardHeader'
@@ -28,12 +29,16 @@ const useStyles = makeStyles({
   },
   loading: {
     display: 'flex',
+    flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
     height: '100vh',
-    width: '100vw',
-    fontSize: 30,
-    fontStyle: 'italic'
+    width: '100vw'
+  },
+  msg: {
+    margin: '0 0 30px',
+    fontSize: 20,
+    fontWeight: 'bold'
   },
   card: {
     marginBottom: 40
@@ -52,9 +57,9 @@ function Home() {
     navigator.geolocation.getCurrentPosition(
       position => {
         fetch(
-          `http://localhost:3000/spots?lat=${position.coords.latitude}&lng=${
-            position.coords.longitude
-          }`
+          `${window.location.origin}/spots?lat=${
+            position.coords.latitude
+          }&lng=${position.coords.longitude}`
         )
           .then(res => res.json())
           .then(json => {
@@ -73,7 +78,10 @@ function Home() {
 
   const loadingMsg =
     !spots || !spots.length ? (
-      <Box className={classes.loading}>Finding hot spots...</Box>
+      <Box className={classes.loading}>
+        <p className={classes.msg}>Finding hot spots...</p>
+        <CircularProgress className={classes.progress} />
+      </Box>
     ) : (
       ''
     )
