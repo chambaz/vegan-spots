@@ -3,13 +3,40 @@ import fetch from 'isomorphic-unfetch'
 import { makeStyles } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Container from '@material-ui/core/Container'
+import Box from '@material-ui/core/Box'
+import Typography from '@material-ui/core/Typography'
 import Card from '@material-ui/core/Card'
 import CardHeader from '@material-ui/core/CardHeader'
 import CardMedia from '@material-ui/core/CardMedia'
 
 const useStyles = makeStyles({
+  header: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 20,
+    padding: 20
+  },
+  icon: {
+    display: 'block',
+    height: 40,
+    marginRight: 10
+  },
+  heading: {
+    fontSize: 30,
+    fontWeight: 'bold'
+  },
+  loading: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '100vh',
+    width: '100vw',
+    fontSize: 30,
+    fontStyle: 'italic'
+  },
   card: {
-    margin: '20px 0'
+    marginBottom: 40
   },
   media: {
     height: 0,
@@ -44,13 +71,24 @@ function Home() {
     )
   }, [])
 
-  const loadingMsg = !spots || !spots.length ? <p>Finding hot spots...</p> : ''
+  const loadingMsg =
+    !spots || !spots.length ? (
+      <Box className={classes.loading}>Finding hot spots...</Box>
+    ) : (
+      ''
+    )
 
   return (
     <div>
       <CssBaseline />
+      {loadingMsg}
       <Container>
-        {loadingMsg}
+        <Box component="header" className={classes.header}>
+          <img className={classes.icon} src="/static/carrot.svg" />
+          <Typography component="h1" className={classes.heading}>
+            VeganSpots
+          </Typography>
+        </Box>
         {spots.map((spot, index) => (
           <Card className={classes.card} key={index}>
             <CardHeader
