@@ -10,10 +10,8 @@ function Home() {
   const [spots, setSpots] = useState([])
 
   useEffect(() => {
-    console.log(1)
     navigator.geolocation.getCurrentPosition(
       position => {
-        console.log(2)
         fetch(
           `${window.location.origin}/spots?lat=${
             position.coords.latitude
@@ -25,7 +23,6 @@ function Home() {
               console.error('Error fetching spots')
               return
             }
-            console.log(3)
             setSpots(json.businesses)
           })
       },
