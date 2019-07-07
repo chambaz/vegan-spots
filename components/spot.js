@@ -17,7 +17,7 @@ function Spot(props) {
   const classes = useStyles()
 
   return (
-    <Card className={classes.card}>
+    <Card className={classes.card} onClick={e => openMap(props.data)}>
       <CardHeader
         title={props.data.name}
         subheader={`${props.data.location.address1}, ${
@@ -31,6 +31,16 @@ function Spot(props) {
       />
     </Card>
   )
+}
+
+function openMap(data) {
+  console.log('open!')
+  window.open(`https://www.google.com/maps/search/?api=1&query=
+  ${data.name +
+    data.location.address1 +
+    data.location.city +
+    data.location.state +
+    data.location.zip_code}`)
 }
 
 export default Spot
