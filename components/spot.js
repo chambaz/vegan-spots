@@ -28,6 +28,12 @@ const useStyles = makeStyles({
     alignItems: 'center',
     padding: '5px 13px 10px'
   },
+  distanceIcon: {
+    width: 15,
+    height: 15,
+    transform: 'rotate(-40deg) translateY(2px)',
+    margin: '0 7px 0 0'
+  },
   media: {
     height: 0,
     paddingTop: '56.25%'
@@ -75,16 +81,23 @@ function Spot(props) {
     )
   }
 
-  const distance = getDistance(
-    {
-      latitude: props.currentLocation[0],
-      longitude: props.currentLocation[1]
-    },
-    {
-      latitude: props.data.coordinates.latitude,
-      longitude: props.data.coordinates.longitude
-    }
-  )
+  let distance =
+    getDistance(
+      {
+        latitude: props.currentLocation[0],
+        longitude: props.currentLocation[1]
+      },
+      {
+        latitude: props.data.coordinates.latitude,
+        longitude: props.data.coordinates.longitude
+      }
+    ) * 0.00062137
+
+  if (distance < 1) {
+    distance = '< 1 mile away'
+  } else {
+    distance = `${Math.ceil(distance)} miles away`
+  }
 
   return (
     <Card className={classes.card}>
@@ -97,7 +110,10 @@ function Spot(props) {
       />
       <Box className={classes.details}>
         <Rating rate={props.data.rating} />
-        <Box>{distance}m away</Box>
+        <Box>
+          <NavigationIcon className={classes.distanceIcon} />
+          {distance}
+        </Box>
       </Box>
       {content}
       <CardActions disableSpacing>

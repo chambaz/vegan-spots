@@ -10,7 +10,8 @@ const useStyles = makeStyles({
     padding: 0
   },
   item: {
-    display: 'block'
+    display: 'flex',
+    alignItems: 'center'
   },
   star: {
     color: '#ffde03'
