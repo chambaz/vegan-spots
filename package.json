@@ -13,6 +13,7 @@
   "dependencies": {
     "@material-ui/core": "^4.2.0",
     "@material-ui/icons": "^4.2.1",
+    "geolib": "^3.0.4",
     "google-map-react": "^1.1.4",
     "isomorphic-unfetch": "^3.0.0",
     "next": "^8.1.0",
