@@ -7,11 +7,16 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import Container from '@material-ui/core/Container'
 
 function Home() {
+  const [currentLocation, setCurrentLocation] = useState([])
   const [spots, setSpots] = useState([])
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       position => {
+        setCurrentLocation([
+          position.coords.latitude,
+          position.coords.longitude
+        ])
         fetch(
           `${window.location.origin}/spots?lat=${
             position.coords.latitude
@@ -39,7 +44,7 @@ function Home() {
       <Container>
         <Header />
         {spots.map((spot, index) => (
-          <Spot data={spot} key={index} />
+          <Spot data={spot} currentLocation={currentLocation} key={index} />
         ))}
       </Container>
     </div>

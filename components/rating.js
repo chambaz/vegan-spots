@@ -7,7 +7,7 @@ const useStyles = makeStyles({
   list: {
     display: 'flex',
     margin: 0,
-    padding: '0 13px 10px'
+    padding: 0
   },
   item: {
     display: 'block'

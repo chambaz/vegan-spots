@@ -10,6 +10,7 @@ import ShareIcon from '@material-ui/icons/Share'
 import MapIcon from '@material-ui/icons/Map'
 import NavigationIcon from '@material-ui/icons/Navigation'
 import GoogleMapReact from 'google-map-react'
+import getDistance from 'geolib/es/getDistance'
 import Rating from './rating'
 
 const useStyles = makeStyles({
@@ -20,6 +21,12 @@ const useStyles = makeStyles({
   },
   header: {
     paddingBottom: 5
+  },
+  details: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: '5px 13px 10px'
   },
   media: {
     height: 0,
@@ -68,6 +75,17 @@ function Spot(props) {
     )
   }
 
+  const distance = getDistance(
+    {
+      latitude: props.currentLocation[0],
+      longitude: props.currentLocation[1]
+    },
+    {
+      latitude: props.data.coordinates.latitude,
+      longitude: props.data.coordinates.longitude
+    }
+  )
+
   return (
     <Card className={classes.card}>
       <CardHeader
@@ -77,7 +95,10 @@ function Spot(props) {
           props.data.location.city
         }`}
       />
-      <Rating rate={props.data.rating} />
+      <Box className={classes.details}>
+        <Rating rate={props.data.rating} />
+        <Box>{distance}m away</Box>
+      </Box>
       {content}
       <CardActions disableSpacing>
         <IconButton aria-label="Share">
