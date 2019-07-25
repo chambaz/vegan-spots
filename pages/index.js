@@ -18,9 +18,9 @@ function Home() {
           position.coords.longitude
         ])
         fetch(
-          `${window.location.origin}/spots?lat=${
-            position.coords.latitude
-          }&lng=${position.coords.longitude}`
+          `/api/spots?lat=${position.coords.latitude}&lng=${
+            position.coords.longitude
+          }`
         )
           .then(res => res.json())
           .then(json => {
