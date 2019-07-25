@@ -25,7 +25,7 @@ function Rating(props) {
 
   for (let i = 0; i < baseRate; i++) {
     stars.push(
-      <Box className={classes.item} component="li">
+      <Box key={i} className={classes.item} component="li">
         <Star className={classes.star} />
       </Box>
     )
@@ -33,7 +33,7 @@ function Rating(props) {
 
   if (props.rate - baseRate === 0.5) {
     stars.push(
-      <Box className={classes.item} component="li">
+      <Box key={baseRate.length + 1} className={classes.item} component="li">
         <StarHalf className={classes.star} />
       </Box>
     )
