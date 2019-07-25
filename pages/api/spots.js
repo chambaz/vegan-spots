@@ -2,8 +2,7 @@ const { parse } = require('url')
 const fetch = require('isomorphic-unfetch')
 
 export default (req, res) => {
-  const parsedUrl = parse(req.url, true)
-  const { pathname, query } = parsedUrl
+  const { query } = parse(req.url, true)
 
   fetch(
     `https://api.yelp.com/v3/businesses/search?categories=restaurant,vegan&term=vegan&latitude=${
