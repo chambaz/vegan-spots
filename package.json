@@ -17,6 +17,8 @@
     "google-map-react": "^1.1.4",
     "isomorphic-unfetch": "^3.0.0",
     "next": "^9.0.2",
+    "next-mui-helper": "^3.0.1",
+    "next-transpile-modules": "^2.3.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
   }
