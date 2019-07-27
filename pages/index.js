@@ -10,11 +10,14 @@ import Container from '@material-ui/core/Container'
 import Box from '@material-ui/core/Box'
 
 const useStyles = makeStyles({
+  container: {
+    marginTop: 56
+  },
   map: {
     display: 'none'
   },
   list: {
-    display: 'block'
+    marginTop: 75
   }
 })
 
@@ -22,6 +25,7 @@ function Home() {
   const [currentLocation, setCurrentLocation] = useState([])
   const [spots, setSpots] = useState([])
   const [map, setMap] = useState('')
+  const [view, setView] = useState('list')
   const classes = useStyles()
 
   useEffect(() => {
@@ -63,10 +67,16 @@ function Home() {
     <Box>
       <CssBaseline />
       <Loading show={!spots || !spots.length} />
-      <Header />
-      <Box>
-        <Box className={classes.map}>{map}</Box>
-        <Box className={classes.list}>
+      <Header view={{ state: view, setState: setView }} />
+      <Box className={classes.container}>
+        <Box
+          className={classes.map}
+          style={{ display: view === 'map' ? 'block' : 'none' }}>
+          {map}
+        </Box>
+        <Box
+          className={classes.list}
+          style={{ display: view === 'list' ? 'block' : 'none' }}>
           <Container>
             {spots.map((spot, index) => (
               <Spot data={spot} currentLocation={currentLocation} key={index} />

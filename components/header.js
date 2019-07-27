@@ -17,18 +17,26 @@ const useStyles = makeStyles({
   }
 })
 
-function Header() {
+function Header(props) {
   const classes = useStyles()
 
   return (
-    <AppBar className={classes.header} position="static">
+    <AppBar className={classes.header}>
       <Toolbar>
         <img className={classes.logo} src="/static/logo.svg" />
         <Box className={classes.toggle}>
           <Grid component="label" container alignItems="center">
             <Grid item>List</Grid>
             <Grid item>
-              <Switch color="default" />
+              <Switch
+                color="default"
+                onChange={() => {
+                  console.log('hi1')
+                  props.view.setState(
+                    props.view.state === 'map' ? 'list' : 'map'
+                  )
+                }}
+              />
             </Grid>
             <Grid item>Map</Grid>
           </Grid>
