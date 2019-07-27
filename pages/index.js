@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import fetch from 'isomorphic-unfetch'
+import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
 import Loading from '../components/loading'
 import Header from '../components/header'
 import Map from '../components/map'
@@ -66,6 +67,14 @@ function Home() {
     )
   }, [])
 
+  useEffect(() => {
+    if (view === 'map') {
+      disableBodyScroll()
+    } else {
+      enableBodyScroll()
+    }
+  }, [view])
+
   return (
     <Box>
       <CssBaseline />
@@ -79,7 +88,10 @@ function Home() {
         </Box>
         <Box
           className={classes.list}
-          style={{ visibility: view === 'list' ? 'visible' : 'hidden' }}>
+          style={{
+            visibility: view === 'list' ? 'visible' : 'hidden',
+            display: view === 'list' ? 'block' : 'none'
+          }}>
           <Container>
             {spots.map((spot, index) => (
               <Spot data={spot} currentLocation={currentLocation} key={index} />
