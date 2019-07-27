@@ -117,9 +117,9 @@ function Spot(props) {
       {content}
       <CardActions disableSpacing>
         <IconButton aria-label="Share">
-          <ShareIcon />
+          <ShareIcon onClick={() => shareSpot(props.data)} />
         </IconButton>
-        <IconButton aria-label="Map" onClick={e => setShowMap(!showMap)}>
+        <IconButton aria-label="Map" onClick={() => setShowMap(!showMap)}>
           <MapIcon />
         </IconButton>
         <IconButton
@@ -143,11 +143,28 @@ function renderMarkers(map, maps, data) {
   })
 }
 
-function openDirections(data) {
-  window.location = `https://www.google.com/maps/dir/?api=1&destination=
+function mapsLink(data) {
+  return `https://www.google.com/maps/dir/?api=1&destination=
   ${data.name}, ${data.location.address1}, ${data.location.city}, ${
     data.location.state
   } ${data.location.zip_code}`
+}
+
+function shareSpot(data) {
+  if (navigator.share) {
+    navigator
+      .share({
+        title: data.name,
+        url: mapsLink(data)
+      })
+      .then(() => {
+        alert('Thanks for sharing!')
+      })
+  }
+}
+
+function openDirections(data) {
+  window.location = mapsLink(data)
 }
 
 export default Spot
