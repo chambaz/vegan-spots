@@ -10,14 +10,16 @@ import Container from '@material-ui/core/Container'
 import Box from '@material-ui/core/Box'
 
 const useStyles = makeStyles({
-  container: {
-    marginTop: 56
-  },
   map: {
-    display: 'none'
+    visibility: 'hidden',
+    position: 'absolute',
+    top: 56,
+    height: '100vh',
+    width: '100vw'
   },
   list: {
-    marginTop: 75
+    position: 'absolute',
+    top: 56
   }
 })
 
@@ -36,13 +38,6 @@ function Home() {
           position.coords.longitude
         ])
 
-        setMap(
-          <Map
-            latitude={position.coords.latitude}
-            longitude={position.coords.longitude}
-          />
-        )
-
         fetch(
           `/api/spots?lat=${position.coords.latitude}&lng=${
             position.coords.longitude
@@ -55,6 +50,14 @@ function Home() {
               return
             }
             setSpots(json.businesses)
+
+            setMap(
+              <Map
+                data={json.businesses}
+                latitude={position.coords.latitude}
+                longitude={position.coords.longitude}
+              />
+            )
           })
       },
       () => {
@@ -71,12 +74,12 @@ function Home() {
       <Box className={classes.container}>
         <Box
           className={classes.map}
-          style={{ display: view === 'map' ? 'block' : 'none' }}>
+          style={{ visibility: view === 'map' ? 'visible' : 'hidden' }}>
           {map}
         </Box>
         <Box
           className={classes.list}
-          style={{ display: view === 'list' ? 'block' : 'none' }}>
+          style={{ visibility: view === 'list' ? 'visible' : 'hidden' }}>
           <Container>
             {spots.map((spot, index) => (
               <Spot data={spot} currentLocation={currentLocation} key={index} />

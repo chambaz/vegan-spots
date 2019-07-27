@@ -19,10 +19,37 @@ function Map(props) {
           key: 'AIzaSyAztPu0CRUV_tr_5UJUajdPUoW7WK24S0o'
         }}
         defaultCenter={[props.latitude, props.longitude]}
-        defaultZoom={14}
+        defaultZoom={12}
+        onGoogleApiLoaded={({ map, maps }) =>
+          renderMarkers(map, maps, props.data)
+        }
       />
     </Box>
   )
+}
+
+function renderMarkers(map, maps, data) {
+  const bounds = new google.maps.LatLngBounds()
+
+  data.forEach(spot => {
+    new maps.Marker({
+      position: {
+        lat: spot.coordinates.latitude,
+        lng: spot.coordinates.longitude
+      },
+      map,
+      title: spot.name
+    })
+
+    bounds.extend(
+      new google.maps.LatLng(
+        spot.coordinates.latitude,
+        spot.coordinates.longitude
+      )
+    )
+  })
+
+  map.fitBounds(bounds)
 }
 
 export default Map
