@@ -1,5 +1,10 @@
 {
   "version": 1,
   "alias": "vegan-spots",
-  "name": "vegan-spots"
+  "name": "vegan-spots",
+  "build": {
+    "env": {
+      "YELP_API_KEY": "@yelp-api-key"
+    }
+  }
 }

@@ -10,8 +10,7 @@ export default (req, res) => {
     }&longitude=${query.lng}&sort_by=rating`,
     {
       headers: {
-        Authorization:
-          'Bearer BqkOqV9exIsg_lFAgSFfQzCy3zEXUSgmFq5PjApGw9SIaU3wgm5Wxc0Zle2QxfOeKDjiy2lVoSCDITbOpV6odrqf0PIBJ96GnBL0oH8Bx6qBga_V5d_2IudiH_ogXXYx'
+        Authorization: `Bearer ${process.env.YELP_API_KEY}`
       }
     }
   )
