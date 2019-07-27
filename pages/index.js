@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import fetch from 'isomorphic-unfetch'
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
 import Loading from '../components/loading'
@@ -29,6 +29,7 @@ function Home() {
   const [spots, setSpots] = useState([])
   const [map, setMap] = useState('')
   const [view, setView] = useState('list')
+  const mapContainer = useRef(null)
   const classes = useStyles()
 
   useEffect(() => {
@@ -69,9 +70,9 @@ function Home() {
 
   useEffect(() => {
     if (view === 'map') {
-      disableBodyScroll()
+      disableBodyScroll(mapContainer)
     } else {
-      enableBodyScroll()
+      enableBodyScroll(mapContainer)
     }
   }, [view])
 
@@ -83,6 +84,7 @@ function Home() {
       <Box className={classes.container}>
         <Box
           className={classes.map}
+          ref={mapContainer}
           style={{ visibility: view === 'map' ? 'visible' : 'hidden' }}>
           {map}
         </Box>
