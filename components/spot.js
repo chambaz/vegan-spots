@@ -15,9 +15,8 @@ import Rating from './rating'
 
 const useStyles = makeStyles({
   card: {
-    marginBottom: 40,
-    maxWidth: 343,
-    margin: '0 auto'
+    margin: '20px auto',
+    maxWidth: 343
   },
   header: {
     paddingBottom: 5

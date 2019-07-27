@@ -41,8 +41,8 @@ function Home() {
     <div>
       <CssBaseline />
       <Loading show={!spots || !spots.length} />
+      <Header />
       <Container>
-        <Header />
         {spots.map((spot, index) => (
           <Spot data={spot} currentLocation={currentLocation} key={index} />
         ))}
