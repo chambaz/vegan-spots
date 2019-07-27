@@ -31,7 +31,6 @@ function Header(props) {
               <Switch
                 color="default"
                 onChange={() => {
-                  console.log('hi1')
                   props.view.setState(
                     props.view.state === 'map' ? 'list' : 'map'
                   )
