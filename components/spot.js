@@ -116,10 +116,10 @@ function Spot(props) {
       </Box>
       {content}
       <CardActions disableSpacing>
-        <IconButton aria-label="Share">
-          <ShareIcon onClick={() => shareSpot(props.data)} />
+        <IconButton onClick={() => shareSpot(props.data)} aria-label="Share">
+          <ShareIcon />
         </IconButton>
-        <IconButton aria-label="Map" onClick={() => setShowMap(!showMap)}>
+        <IconButton onClick={() => setShowMap(!showMap)} aria-label="Map">
           <MapIcon />
         </IconButton>
         <IconButton
