@@ -152,14 +152,10 @@ function mapsLink(data) {
 
 function shareSpot(data) {
   if (navigator.share) {
-    navigator
-      .share({
-        title: data.name,
-        url: mapsLink(data)
-      })
-      .then(() => {
-        alert('Thanks for sharing!')
-      })
+    navigator.share({
+      title: data.name,
+      url: mapsLink(data)
+    })
   }
 }
 
