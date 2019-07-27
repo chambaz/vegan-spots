@@ -71,6 +71,7 @@ function Home() {
   useEffect(() => {
     if (view === 'map') {
       disableBodyScroll(mapContainer)
+      document.body.scrollTop = 0
     } else {
       enableBodyScroll(mapContainer)
     }
