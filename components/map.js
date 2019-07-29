@@ -16,7 +16,7 @@ function Map(props) {
     <Box className={classes.map}>
       <GoogleMapReact
         bootstrapURLKeys={{
-          key: 'AIzaSyAztPu0CRUV_tr_5UJUajdPUoW7WK24S0o'
+          key: 'AIzaSyCokTDUDFeNzjuiulMUv8kbFidhf4rK23M'
         }}
         defaultCenter={[props.latitude, props.longitude]}
         defaultZoom={12}

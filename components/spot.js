@@ -13,10 +13,22 @@ import GoogleMapReact from 'google-map-react'
 import getDistance from 'geolib/es/getDistance'
 import Rating from './rating'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   card: {
-    margin: '20px auto',
-    maxWidth: 343
+    margin: '20px 10px 0',
+    width: '100%',
+
+    [theme.breakpoints.up('sm')]: {
+      width: 'calc(50% - 20px)'
+    },
+
+    [theme.breakpoints.up('md')]: {
+      width: 'calc(33% - 20px)'
+    },
+
+    [theme.breakpoints.up('lg')]: {
+      width: 'calc(25% - 20px)'
+    }
   },
   header: {
     paddingBottom: 5
@@ -47,7 +59,7 @@ const useStyles = makeStyles({
     width: 80,
     height: 80
   }
-})
+}))
 
 function Spot(props) {
   const [showMap, setShowMap] = useState(false)
@@ -66,7 +78,7 @@ function Spot(props) {
     content = (
       <Box className={classes.map}>
         <GoogleMapReact
-          bootstrapURLKeys={{ key: 'AIzaSyAztPu0CRUV_tr_5UJUajdPUoW7WK24S0o' }}
+          bootstrapURLKeys={{ key: 'AIzaSyCokTDUDFeNzjuiulMUv8kbFidhf4rK23M' }}
           defaultCenter={[
             props.data.coordinates.latitude,
             props.data.coordinates.longitude

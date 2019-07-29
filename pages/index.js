@@ -7,22 +7,44 @@ import Map from '../components/map'
 import Spot from '../components/spot'
 import { makeStyles } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
-import Container from '@material-ui/core/Container'
 import Box from '@material-ui/core/Box'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   map: {
     visibility: 'hidden',
     position: 'absolute',
     top: 56,
     height: '100vh',
-    width: '100vw'
+    width: '100vw',
+    [theme.breakpoints.up('sm')]: {
+      top: 63
+    }
   },
   list: {
     position: 'absolute',
-    top: 56
+    top: 56,
+    width: '100vw',
+    [theme.breakpoints.up('sm')]: {
+      top: 76
+    }
+  },
+  spotsContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    padding: '0 10px',
+    [theme.breakpoints.up('sm')]: {
+      padding: '0 20px'
+    },
+    [theme.breakpoints.up('md')]: {
+      padding: '0 10px 0 20px'
+    }
+  },
+  spots: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'flex-start'
   }
-})
+}))
 
 function Home() {
   const [currentLocation, setCurrentLocation] = useState([])
@@ -95,11 +117,17 @@ function Home() {
             visibility: view === 'list' ? 'visible' : 'hidden',
             display: view === 'list' ? 'block' : 'none'
           }}>
-          <Container>
-            {spots.map((spot, index) => (
-              <Spot data={spot} currentLocation={currentLocation} key={index} />
-            ))}
-          </Container>
+          <Box className={classes.spotsContainer}>
+            <Box className={classes.spots}>
+              {spots.map((spot, index) => (
+                <Spot
+                  data={spot}
+                  currentLocation={currentLocation}
+                  key={index}
+                />
+              ))}
+            </Box>
+          </Box>
         </Box>
       </Box>
     </Box>
