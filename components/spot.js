@@ -31,6 +31,15 @@ const useStyles = makeStyles(theme => ({
     }
   },
   header: {
+    [theme.breakpoints.up('sm')]: {
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'space-between',
+      height: 146,
+      overflow: 'hidden'
+    }
+  },
+  heading: {
     paddingBottom: 5
   },
   details: {
@@ -110,20 +119,28 @@ function Spot(props) {
     distance = `${Math.ceil(distance)} miles away`
   }
 
+  let title = props.data.name
+
+  if (title.length >= 40) {
+    title = `${props.data.name.substring(0, 37).trim()}...`
+  }
+
   return (
     <Card className={classes.card}>
-      <CardHeader
-        className={classes.header}
-        title={props.data.name}
-        subheader={`${props.data.location.address1}, ${
-          props.data.location.city
-        }`}
-      />
-      <Box className={classes.details}>
-        <Rating rate={props.data.rating} />
-        <Box>
-          <NavigationIcon className={classes.distanceIcon} />
-          {distance}
+      <Box className={classes.header}>
+        <CardHeader
+          className={classes.heading}
+          title={title}
+          subheader={`${props.data.location.address1}, ${
+            props.data.location.city
+          }`}
+        />
+        <Box className={classes.details}>
+          <Rating rate={props.data.rating} />
+          <Box>
+            <NavigationIcon className={classes.distanceIcon} />
+            {distance}
+          </Box>
         </Box>
       </Box>
       {content}
